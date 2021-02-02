@@ -1,11 +1,8 @@
 package com.github.igorferreira.otp;
 
-import java.util.Random;
 import java.util.UUID;
 import org.jboss.aerogear.security.otp.Totp;
 import org.jboss.aerogear.security.otp.api.Base32;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -17,7 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  */
 public final class App {
-    private static final int MAX_SIZE_SECRET = 11;
 
     public App() {
     }
@@ -44,16 +40,20 @@ public final class App {
 
         App app = new App();
 
+        String secret = generateSecret();
+
+        System.out.println("new Secret in Base32: " + secret);
+
+        String pin = app.generateOTP(secret);
+
         // print OTP gerado
-        System.out.println("\nOne-Time-PIN gerado : " + app.generateOTP(generateSecret()));
+        System.out.println("\nOne-Time-PIN gerado : " + pin);
     }
 
     private static String generateSecret() {
         UUID uuid = UUID.randomUUID();
-        String uuidVal = uuid.toString().replaceAll("-", "").substring(0, MAX_SIZE_SECRET).toUpperCase().trim();
-        String secret = Base32.encode(uuidVal.getBytes());
-        System.out.println("new Secret in Base32: " + secret);
-        return secret;
+        String uuidVal = uuid.toString().replace("-", "");
+        return  Base32.encode(uuidVal.toString().getBytes());
     }
 
 }
