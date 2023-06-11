@@ -55,7 +55,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <packageName>com.github.igorferreira.otp</packageName> 
+              <packageName>com.github.igorferreira.otp</packageName>
               <mainClass>com.github.igorferreira.otp.App</mainClass>
             </manifest>
           </archive>
@@ -110,11 +110,11 @@
           </dependency>
         </dependencies>
         <configuration>
-          <configLocation>com/github/ngeor/checkstyle.xml</configLocation> 
+          <configLocation>com/github/ngeor/checkstyle.xml</configLocation>
           <!-- <propertesLocation>${basedir}/checkstyle.properties</propertiesLocation> -->
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <skip>${skipTests}</skip>
-        </configuration>     
+        </configuration>
         <executions>
           <execution>
             <id>checkstyle</id>
@@ -198,6 +198,24 @@
         </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>3.20.0</version>
+          <configuration>
+            <targetJdk>11</targetJdk>
+            <excludes>
+              <exclude>**/*Exception.java</exclude>
+            </excludes>
+            <rulesets>
+              <ruleset>/ruleset.xml</ruleset>
+            </rulesets>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
   <reporting>
     <plugins>
